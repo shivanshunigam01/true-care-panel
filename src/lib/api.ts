@@ -3,7 +3,7 @@ import { Lead } from "@/types/leads";
 import axios from "axios";
 
 const API_URL =
-  import.meta.env.VITE_API_URL || "https://api.truehospitals.com/leads";
+  import.meta.env.VITE_API_URL || "https://api.truehospitals.com/api/leads";
 
 export const getLeads = async (): Promise<Lead[]> => {
   const { data } = await axios.get(API_URL);
