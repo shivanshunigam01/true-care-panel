@@ -1,10 +1,36 @@
-import { getLeads } from "@/utils/localStorageHelpers";
+"use client";
+import { useEffect, useState } from "react";
 import { LeadsLineChart } from "@/components/admin/charts/LeadsLineChart";
 import { CategoryPieChart } from "@/components/admin/charts/CategoryPieChart";
 import { ConversionBarChart } from "@/components/admin/charts/ConversionBarChart";
+import { getLeads } from "@/lib/api";
+import { Lead } from "@/types/leads";
 
 export default function Analytics() {
-  const leads = getLeads();
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchLeads() {
+      try {
+        const data = await getLeads();
+        setLeads(data);
+      } catch (error) {
+        console.error("Error fetching leads:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchLeads();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center py-10 text-muted-foreground">
+        Loading analytics...
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -17,7 +43,8 @@ export default function Analytics() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <LeadsLineChart />
-        <CategoryPieChart leads={leads} />
+        <CategoryPieChart leads={leads} />{" "}
+        {/* ✅ leads is now resolved array */}
       </div>
 
       <div className="grid gap-6">

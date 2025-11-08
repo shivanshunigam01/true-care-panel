@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Lead } from "@/types/leads";
 import {
   PieChart,
   Pie,
@@ -7,7 +8,6 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
-import { Lead } from "@/utils/localStorageHelpers";
 
 interface CategoryPieChartProps {
   leads: Lead[];
@@ -48,7 +48,10 @@ export const CategoryPieChart = ({ leads }: CategoryPieChartProps) => {
               dataKey="value"
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip

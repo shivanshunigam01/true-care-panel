@@ -6,6 +6,11 @@ import trueLogo from "@/assets/true-logo.png";
 const Index = () => {
   const navigate = useNavigate();
 
+  const handleAdminAccess = () => {
+    const token = localStorage.getItem("adminToken");
+    navigate(token ? "/admin" : "/login");
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-background via-secondary to-background">
       <div className="text-center space-y-8 px-4">
@@ -20,7 +25,7 @@ const Index = () => {
           </p>
         </div>
         <Button
-          onClick={() => navigate("/admin")}
+          onClick={handleAdminAccess}
           size="lg"
           className="gap-2 text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all"
         >

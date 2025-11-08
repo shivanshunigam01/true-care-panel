@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Lead } from "@/utils/localStorageHelpers";
+import { Lead } from "@/types/leads";
 
 interface LeadModalProps {
   open: boolean;
@@ -47,7 +47,7 @@ export const LeadModal = ({ open, onClose, onSave, lead }: LeadModalProps) => {
         category: "General Surgeon",
         surgeryType: "",
         concern: "",
-        date: new Date().toISOString().split("T")[0],
+        date: new Date(),
         status: "New",
       });
     }
@@ -113,7 +113,9 @@ export const LeadModal = ({ open, onClose, onSave, lead }: LeadModalProps) => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="General Surgeon">General Surgeon</SelectItem>
+                  <SelectItem value="General Surgeon">
+                    General Surgeon
+                  </SelectItem>
                   <SelectItem value="Gynecologist">Gynecologist</SelectItem>
                 </SelectContent>
               </Select>
